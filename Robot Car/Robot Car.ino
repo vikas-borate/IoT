@@ -3,6 +3,8 @@
 //Latest working code for working Obstacle avoidance robot car
 //Vikas Borate
  
+//Multiple serial prints are used for debugging to see if motor rotates wheels correctly and servo motor detects distance croeectly etc
+
 // setup servo
 #define SERVORIGHT   50
 #define SERVOCENTRE  100
@@ -153,9 +155,6 @@ void loop() {
     // get distance from obstacle straight ahead
     unsigned int distance = ping();
     Serial.print("Distance: "); Serial.println(distance);
-   // display.clear();
-   // display.drawString(10, 20, "Distance: "+String(distance));
-  //  display.display();
     if (distance < 30 && distance > 0)
     {
         if (distance < 10)
@@ -172,7 +171,6 @@ void loop() {
         {
             // stop both motors
             Serial.println("Motor stop...");
-           // display.drawString(10, 40, "Motor stop...") ; 
             stoped();
             
             // scan for obstacles
@@ -182,14 +180,12 @@ void loop() {
             if (turn_direction == 'L')
             {
               Serial.println("Turn left...");
-            //  display.drawString(10, 40, "Turn left...") ; 
                 left();
                 delay(500);
             }
             else if (turn_direction == 'R')
             {
               Serial.println("Turn right...");
-            //  display.drawString(10, 40, "Turn right...") ; 
                 right();
                 delay(500);
             }
@@ -199,7 +195,6 @@ void loop() {
               if(stopCount > 3){
                 stopCount = 0;
                 Serial.println("Turn back...");
-              //  display.drawString(10, 40, "Turn back...") ; 
                 right();
                 delay(700);
               }
@@ -211,7 +206,6 @@ void loop() {
     {
         // no obstacle, keep going forward
         Serial.println("No obstacle, keep going forward...");
-      //  display.drawString(5, 40, "keep going forward...") ; 
         forward();
     }
 }
